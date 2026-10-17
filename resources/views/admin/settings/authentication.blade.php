@@ -374,14 +374,13 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label class="row">
-                                                <span class="col">{{ __('labels.enable_firebase_otp_verification') }}</span>
+                                                <span class="col">{{ __('labels.enable_firebase') }}</span>
                                                 <span class="col-auto">
                                                         <label class="form-check form-check-single form-switch">
                                                             <input class="form-check-input" type="checkbox"
                                                                    name="firebase" value="1" {{ isset($settings['firebase']) && $settings['firebase'] ? 'checked' : '' }} />
                                                         </label>
                                                     </span>
-                                                <small class="form-text text-muted">{{ __('labels.firebase_otp_verification_hint') }}</small>
                                             </label>
                                         </div>
                                         <div id="firebaseFields"

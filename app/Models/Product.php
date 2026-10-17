@@ -1074,6 +1074,39 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * Load an approved product by id without zone filtering.
+     *
+     * Used for share / SSR when the requester's coordinates (often the
+     * storefront default) are outside the product's delivery zone — otherwise
+     * /share/products/{slug} and WhatsApp previews hard-404.
+     */
+    public static function getApprovedProductById(float $latitude, float $longitude, $id): ?Model
+    {
+        $product = self::query()->with([
+            'variants.storeProductVariants.store',
+            'variants.attributes.attribute',
+            'variants.attributes.attributeValue',
+            'variants.storeVariantAddons.addonGroup',
+            'variants.storeVariantAddons.addonItem',
+            'variantAttributes.attribute',
+            'variantAttributes.attributeValue',
+            'customProductSections.fields',
+        ])
+            ->where('id', $id)
+            ->where('verification_status', ProductVarificationStatusEnum::APPROVED())
+            ->first();
+
+        if (! empty($product)) {
+            $product->user_latitude = $latitude;
+            $product->user_longitude = $longitude;
+            $product->zone_info = DeliveryZoneService::getZonesAtPoint($latitude, $longitude);
+            $product->preferNearestStoreVariants($latitude, $longitude);
+        }
+
+        return $product;
+    }
+
+    /**
      * Reorder each loaded variant's storeProductVariants so the nearest in-stock store wins.
      *
      * Stores are ranked by (has_stock DESC, distance_km ASC). Downstream resources read the

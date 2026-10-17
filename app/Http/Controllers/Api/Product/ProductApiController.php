@@ -268,6 +268,16 @@ class ProductApiController extends Controller
             }
             $id = $product->id;
             $product = Product::getProductByLocation(latitude: $validated['latitude'], longitude: $validated['longitude'], id: $id);
+            // Share links / SSR use the storefront default location, which may
+            // sit outside this product's zone. Fall back to a zone-agnostic load
+            // so /share/products/{slug} and WhatsApp previews do not 404.
+            if (!$product) {
+                $product = Product::getApprovedProductById(
+                    latitude: (float) $validated['latitude'],
+                    longitude: (float) $validated['longitude'],
+                    id: $id
+                );
+            }
             if (!$product) {
                 return ApiResponseType::sendJsonResponse(
                     success: false,

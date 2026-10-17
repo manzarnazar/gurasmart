@@ -9,6 +9,7 @@ use App\Models\Cart;
 use App\Models\Store;
 use App\Services\CartService;
 use App\Services\DeliveryScheduleService;
+use App\Services\SettingService;
 use App\Types\Api\ApiResponseType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -37,8 +38,8 @@ class CreateOrderRequest extends FormRequest
 
     /**
      * Determine if the user is authorized to make this request. Orders
-     * require a fully verified customer (both email and mobile) so delivery
-     * ops can reach them on either channel.
+     * require a verified customer. Email is always required; mobile OTP
+     * verification is required only when Firebase OTP verification is enabled.
      */
     public function authorize(): bool
     {
@@ -61,6 +62,7 @@ class CreateOrderRequest extends FormRequest
     protected function failedAuthorization(): void
     {
         $user = $this->user();
+        $otpRequired = app(SettingService::class)->isFirebaseOtpVerificationEnabled();
 
         throw new HttpResponseException(
             ApiResponseType::sendJsonResponse(
@@ -68,7 +70,9 @@ class CreateOrderRequest extends FormRequest
                 'labels.account_verification_required',
                 [
                     'email_verified' => $user?->email_verified_at !== null,
-                    'mobile_verified' => $user?->mobile_verified_at !== null,
+                    'mobile_verified' => $otpRequired
+                        ? ($user?->mobile_verified_at !== null)
+                        : true,
                 ]
             )
         );

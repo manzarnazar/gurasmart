@@ -337,6 +337,22 @@ class SettingService
     }
 
     /**
+     * Whether customer phone OTP login / mobile verification is required.
+     * Independent of Firebase client credentials (social login / push).
+     * Defaults to true when the setting key is missing (backward compatible).
+     */
+    public function isFirebaseOtpVerificationEnabled(): bool
+    {
+        $config = $this->getSettingValues(SettingTypeEnum::AUTHENTICATION());
+
+        if (! array_key_exists('firebaseOtpVerification', $config)) {
+            return true;
+        }
+
+        return filter_var($config['firebaseOtpVerification'], FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
      * Resolve the phonecode for the first country matching the given currency.
      */
     public function resolveCountryCodeFromCurrency(?string $currency): string

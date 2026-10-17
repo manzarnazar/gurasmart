@@ -8,6 +8,7 @@ use App\Enums\UserLoginTypeEnum;
 use App\Enums\Wallet\WalletTypeEnum;
 use App\Notifications\AdminPasswordResetNotification;
 use App\Notifications\SellerPasswordResetNotification;
+use App\Services\SettingService;
 use App\Support\DemoMode;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -255,13 +256,21 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
     /**
-     * Whether this customer account has both channels verified — required
-     * before they can place an order so delivery ops can reach them on
-     * either channel.
+     * Whether this customer account is verified enough to place an order.
+     * Email is always required. Mobile OTP verification is only required when
+     * Firebase OTP verification is enabled in authentication settings.
      */
     public function isFullyVerified(): bool
     {
-        return $this->email_verified_at !== null && $this->mobile_verified_at !== null;
+        if ($this->email_verified_at === null) {
+            return false;
+        }
+
+        if (! app(SettingService::class)->isFirebaseOtpVerificationEnabled()) {
+            return true;
+        }
+
+        return $this->mobile_verified_at !== null;
     }
 
     /**

@@ -115,6 +115,9 @@ class SettingApiController extends Controller
             data: [
                 'customSms' => (bool)($config['customSms'] ?? false),
                 'firebase' => (bool)($config['firebase'] ?? false),
+                'firebaseOtpVerification' => array_key_exists('firebaseOtpVerification', $config)
+                    ? (bool) $config['firebaseOtpVerification']
+                    : true,
                 'googleLogin' => (bool)($config['googleLogin'] ?? false),
                 'appleLogin' => (bool)($config['appleLogin'] ?? false),
                 'smsGateway' => $config['smsGateway'] ?? '',

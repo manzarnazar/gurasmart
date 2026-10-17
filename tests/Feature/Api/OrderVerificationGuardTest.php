@@ -78,3 +78,18 @@ it('reports isFullyVerified correctly at the model level', function () {
     $this->user->mobile_verified_at = now();
     expect($this->user->isFullyVerified())->toBeTrue();
 });
+
+it('allows order placement with only email verified when Firebase OTP verification is off', function () {
+    \App\Models\Setting::updateOrCreate(
+        ['variable' => 'authentication'],
+        ['value' => json_encode(['firebaseOtpVerification' => false])]
+    );
+    app(\App\Services\SettingService::class)->clearSettingCache('authentication');
+
+    $this->user->forceFill(['email_verified_at' => now()])->save();
+    Sanctum::actingAs($this->user);
+
+    $response = $this->postJson('/api/orders', []);
+
+    expect($response->status())->toBe(422);
+});

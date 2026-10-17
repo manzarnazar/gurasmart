@@ -384,6 +384,8 @@ return [
     'authentication_settings' => 'Authentication Settings',
     'enable_custom_sms' => 'Enable Custom SMS',
     'enable_firebase' => 'Enable Firebase',
+    'firebase_otp_verification' => 'Firebase OTP Verification',
+    'firebase_otp_verification_hint' => 'When disabled, customers can register and place orders without phone OTP verification, and OTP login is hidden in the customer app and web. Social login and push notifications keep working.',
     'custom_sms' => 'Custom SMS',
     'custom_sms_url' => 'Custom SMS URL',
     'custom_sms_url_placeholder' => 'Enter custom SMS URL',

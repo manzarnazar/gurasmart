@@ -40,6 +40,10 @@ class AuthenticationSettingResource extends JsonResource
                 'fireBaseMessagingSenderId' => $this->value['fireBaseMessagingSenderId'] ?? '',
                 'fireBaseAppId' => $this->value['fireBaseAppId'] ?? '',
                 'fireBaseMeasurementId' => $this->value['fireBaseMeasurementId'] ?? '',
+                // Default true so existing installs keep OTP required until admin turns it off.
+                'firebaseOtpVerification' => array_key_exists('firebaseOtpVerification', $this->value ?? [])
+                    ? (bool) $this->value['firebaseOtpVerification']
+                    : true,
                 'googleLogin' => $this->value['googleLogin'] ?? null,
                 'smsGateway' => $smsGateway,
             ]

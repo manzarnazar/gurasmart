@@ -58,6 +58,8 @@ class ProductVariantResource extends JsonResource
             'store_id' => $storeProductVariant->store_id ?? null,
             'store_slug' => $storeProductVariant->store->slug ?? null,
             'store_name' => $storeProductVariant->store->name ?? null,
+            'store_whatsapp_number' => $storeProductVariant->store->whatsapp_number ?? null,
+            'store_country_code' => $storeProductVariant->store->country_code ?? null,
             'stock' => $storeProductVariant->stock ?? null,
             'sku' => $storeProductVariant->sku ?? null,
             'attributes' => $attributes,

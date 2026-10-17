@@ -772,6 +772,8 @@ return [
     'enter_about_us' => 'Enter about us',
     'contact_email' => 'Contact Email',
     'contact_number' => 'Contact Number',
+    'whatsapp_number' => 'WhatsApp Number',
+    'enter_whatsapp_number' => 'Enter WhatsApp number (optional)',
     'select_country' => 'Select country',
     'country_code' => 'Country Code',
     'enter_country_code' => 'Enter country code (e.g., +1)',

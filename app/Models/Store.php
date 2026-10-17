@@ -52,6 +52,7 @@ class Store extends Model implements HasMedia
         'longitude',
         'contact_email',
         'contact_number',
+        'whatsapp_number',
         'description',
         'timing',
         'address_proof',

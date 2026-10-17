@@ -36,6 +36,7 @@ class StoreFactory extends Factory
             // Contacts
             'contact_email' => $this->faker->safeEmail(),
             'contact_number' => $this->faker->e164PhoneNumber(),
+            'whatsapp_number' => $this->faker->optional()->numerify('##########'),
 
             // Optional texts
             'description' => $this->faker->optional()->realText(120),

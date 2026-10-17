@@ -85,6 +85,10 @@
                                         <td class="fw-bold border-0">{{ __('labels.contact_number') }}</td>
                                         <td class="border-0">{{ $store->contact_number }}</td>
                                     </tr>
+                                    <tr>
+                                        <td class="fw-bold border-0">{{ __('labels.whatsapp_number') }}</td>
+                                        <td class="border-0">{{ $store->whatsapp_number ?: '—' }}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

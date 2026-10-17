@@ -81,6 +81,16 @@
                                                                value="{{ old('contact_number', $store->contact_number ?? '') }}" />
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label
+                                                            class="form-label">{{ __('labels.whatsapp_number') }}</label>
+                                                        <input type="number" min="0" class="form-control" name="whatsapp_number"
+                                                               id="whatsapp_number"
+                                                               placeholder="{{ __('labels.enter_whatsapp_number') }}"
+                                                               value="{{ old('whatsapp_number', $store->whatsapp_number ?? '') }}" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

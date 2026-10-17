@@ -16,6 +16,13 @@ class UpdateStoreRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if ($this->input('whatsapp_number') === '' || $this->input('whatsapp_number') === null) {
+            $this->merge(['whatsapp_number' => null]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,6 +34,7 @@ class UpdateStoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'contact_email' => 'required|email|max:255',
             'contact_number' => 'required|numeric|digits_between:7,15',
+            'whatsapp_number' => 'nullable|numeric|digits_between:7,15',
             'address' => 'required|string|max:500',
             'landmark' => 'required|string|max:255',
             'city' => 'required|string|max:100',

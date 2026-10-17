@@ -674,6 +674,8 @@ return [
     'enter_about_us' => 'Ingrese sobre nosotros',
     'contact_email' => 'Email de Contacto',
     'contact_number' => 'Número de Contacto',
+    'whatsapp_number' => 'Número de WhatsApp',
+    'enter_whatsapp_number' => 'Ingrese el número de WhatsApp (opcional)',
     'select_country' => 'Seleccionar país',
     'country_code' => 'Código de País',
     'enter_country_code' => 'Ingrese código de país (ej., +1)',

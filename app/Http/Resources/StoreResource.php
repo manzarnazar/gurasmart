@@ -18,6 +18,7 @@ class StoreResource extends JsonResource
             'product_count' => $this->product_count ?? 0,
             'description' => $this->description,
             'contact_number' => $this->contact_number,
+            'whatsapp_number' => $this->whatsapp_number,
             'contact_email' => $this->contact_email,
             'seller_id' => $this->seller_id,
             'tax_name' => $this->tax_name,

@@ -384,6 +384,7 @@ return [
     'authentication_settings' => 'Authentication Settings',
     'enable_custom_sms' => 'Enable Custom SMS',
     'enable_firebase' => 'Enable Firebase',
+    'account_verification' => 'Account Verification',
     'require_email_verification' => 'Require Email Verification',
     'require_email_verification_hint' => 'When disabled, customers can place orders without verifying their email. When enabled, email must be verified before placing an order.',
     'firebase_otp_verification' => 'Firebase OTP Verification',

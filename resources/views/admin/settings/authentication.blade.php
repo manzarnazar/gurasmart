@@ -36,6 +36,7 @@
                             <a class="nav-link" href="#pills-sms-gateway">{{ __('labels.sms_gateway') }}</a>
                             <a class="nav-link" href="#pills-custom-sms">{{ __('labels.custom_sms') }}</a>
                             <a class="nav-link" href="#pills-firebase">{{ __('labels.firebase') }}</a>
+                            <a class="nav-link" href="#pills-account-verification">{{ __('labels.account_verification') }}</a>
                             <a class="nav-link" href="#pills-social-login">{{ __('labels.social_login') }}</a>
                         </nav>
                     </div>
@@ -383,30 +384,6 @@
                                                     </span>
                                             </label>
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="row">
-                                                <span class="col">{{ __('labels.require_email_verification') }}</span>
-                                                <span class="col-auto">
-                                                        <label class="form-check form-check-single form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="requireEmailVerification" value="1" {{ ($settings['requireEmailVerification'] ?? true) ? 'checked' : '' }} />
-                                                        </label>
-                                                    </span>
-                                                <small class="form-text text-muted">{{ __('labels.require_email_verification_hint') }}</small>
-                                            </label>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="row">
-                                                <span class="col">{{ __('labels.firebase_otp_verification') }}</span>
-                                                <span class="col-auto">
-                                                        <label class="form-check form-check-single form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="firebaseOtpVerification" value="1" {{ ($settings['firebaseOtpVerification'] ?? true) ? 'checked' : '' }} />
-                                                        </label>
-                                                    </span>
-                                                <small class="form-text text-muted">{{ __('labels.firebase_otp_verification_hint') }}</small>
-                                            </label>
-                                        </div>
                                         <div id="firebaseFields"
                                              style="{{ isset($settings['firebase']) && $settings['firebase'] ? 'display: block;' : 'display: none;' }}">
                                             <div class="mb-3">
@@ -466,6 +443,37 @@
                                                        placeholder="{{ __('labels.firebase_measurement_id_placeholder') }}"
                                                        value="{{ $isDemoUser ? Str::mask(($settings['fireBaseMeasurementId'] ?? '****'), '****', 3, 8) : ($settings['fireBaseMeasurementId'] ?? '') }}"/>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card mb-4" id="pills-account-verification">
+                                    <div class="card-header">
+                                        <h4 class="card-title">{{ __('labels.account_verification') }}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="row">
+                                                <span class="col">{{ __('labels.require_email_verification') }}</span>
+                                                <span class="col-auto">
+                                                        <label class="form-check form-check-single form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   name="requireEmailVerification" value="1" {{ ($settings['requireEmailVerification'] ?? true) ? 'checked' : '' }} />
+                                                        </label>
+                                                    </span>
+                                                <small class="form-text text-muted">{{ __('labels.require_email_verification_hint') }}</small>
+                                            </label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="row">
+                                                <span class="col">{{ __('labels.firebase_otp_verification') }}</span>
+                                                <span class="col-auto">
+                                                        <label class="form-check form-check-single form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   name="firebaseOtpVerification" value="1" {{ ($settings['firebaseOtpVerification'] ?? true) ? 'checked' : '' }} />
+                                                        </label>
+                                                    </span>
+                                                <small class="form-text text-muted">{{ __('labels.firebase_otp_verification_hint') }}</small>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>

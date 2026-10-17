@@ -216,16 +216,8 @@ class OrderResource extends JsonResource
 
     private function resolveInvoiceUrl(): string
     {
-        $webSettings = app(SettingService::class)->getSettingValues(SettingTypeEnum::WEB());
-        $customerWebUrl = rtrim((string) ($webSettings['customerWebUrl'] ?? ''), '/');
-
-        if ($customerWebUrl === '') {
-            return URL::signedRoute('order-invoice', ['id' => $this->uuid]) ?? '';
-        }
-
-        $signedPath = URL::signedRoute('order-invoice', ['id' => $this->uuid], null, false);
-
-        return $customerWebUrl.$signedPath;
+        // Blade invoice lives on APP_URL (admin/API), not customerWebUrl (Next.js).
+        return URL::signedRoute('order-invoice', ['id' => $this->uuid]) ?? '';
     }
 
     private function resolveScheduledSlotLabel(): ?string

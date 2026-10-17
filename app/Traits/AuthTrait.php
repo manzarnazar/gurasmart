@@ -627,6 +627,17 @@ trait AuthTrait
     public function phoneCallback(Request $request): JsonResponse
     {
         try {
+            $settingService = app(SettingService::class);
+            $authSetting = $settingService->getSettingByVariable(SettingTypeEnum::AUTHENTICATION());
+            $authConfig = $authSetting?->value ?? [];
+            if (empty($authConfig['firebase'])) {
+                return ApiResponseType::sendJsonResponse(
+                    success: false,
+                    message: 'labels.firebase_otp_not_enabled',
+                    data: [],
+                );
+            }
+
             $request->validate([
                 'idToken' => 'required|string',
                 'name' => 'nullable|string|max:255',

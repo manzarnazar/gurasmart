@@ -676,7 +676,7 @@ return [
     'contact_number' => 'Número de Contacto',
     'whatsapp_number' => 'Número de WhatsApp',
     'enter_whatsapp_number' => 'ej. 919876543210',
-    'whatsapp_number_hint' => 'Opcional. Incluya el código de país con el número (sin + ni espacios). Ejemplo: 91 para India + 9876543210 → 919876543210.',
+    'whatsapp_number_hint' => 'Opcional. Ingrese el número completo con el código de marcación (sin + ni espacios). Ejemplo: 919876543210.',
     'select_country' => 'Seleccionar país',
     'country_code' => 'Código de País',
     'enter_country_code' => 'Ingrese código de país (ej., +1)',

@@ -774,7 +774,7 @@ return [
     'contact_number' => 'Contact Number',
     'whatsapp_number' => 'WhatsApp Number',
     'enter_whatsapp_number' => 'e.g. 919876543210',
-    'whatsapp_number_hint' => 'Optional. Include the country code with the number (no + or spaces). Example: 91 for India + 9876543210 → 919876543210.',
+    'whatsapp_number_hint' => 'Optional. Enter the full number with dialing code (no + or spaces). Example: 919876543210.',
     'select_country' => 'Select country',
     'country_code' => 'Country Code',
     'enter_country_code' => 'Enter country code (e.g., +1)',

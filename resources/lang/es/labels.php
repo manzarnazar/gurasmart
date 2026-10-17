@@ -298,6 +298,8 @@ return [
     'authentication_settings' => 'Configuración de Autenticación',
     'enable_custom_sms' => 'Habilitar SMS Personalizado',
     'enable_firebase' => 'Habilitar Firebase',
+    'require_email_verification' => 'Requerir verificación de correo',
+    'require_email_verification_hint' => 'Si está desactivada, los clientes pueden realizar pedidos sin verificar su correo. Si está activada, el correo debe verificarse antes de realizar un pedido.',
     'firebase_otp_verification' => 'Verificación OTP de Firebase',
     'firebase_otp_verification_hint' => 'Si está desactivada, los clientes pueden registrarse y realizar pedidos sin verificación OTP del teléfono, y el inicio de sesión OTP se oculta en la app y la web. El inicio de sesión social y las notificaciones push siguen funcionando.',
     'custom_sms' => 'SMS Personalizado',

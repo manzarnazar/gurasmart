@@ -93,3 +93,35 @@ it('allows order placement with only email verified when Firebase OTP verificati
 
     expect($response->status())->toBe(422);
 });
+
+it('allows order placement with only mobile verified when require email verification is off', function () {
+    \App\Models\Setting::updateOrCreate(
+        ['variable' => 'authentication'],
+        ['value' => json_encode(['requireEmailVerification' => false])]
+    );
+    app(\App\Services\SettingService::class)->clearSettingCache('authentication');
+
+    $this->user->forceFill(['mobile_verified_at' => now()])->save();
+    Sanctum::actingAs($this->user);
+
+    $response = $this->postJson('/api/orders', []);
+
+    expect($response->status())->toBe(422);
+});
+
+it('allows order placement with neither channel verified when both verification toggles are off', function () {
+    \App\Models\Setting::updateOrCreate(
+        ['variable' => 'authentication'],
+        ['value' => json_encode([
+            'requireEmailVerification' => false,
+            'firebaseOtpVerification' => false,
+        ])]
+    );
+    app(\App\Services\SettingService::class)->clearSettingCache('authentication');
+
+    Sanctum::actingAs($this->user);
+
+    $response = $this->postJson('/api/orders', []);
+
+    expect($response->status())->toBe(422);
+});

@@ -38,8 +38,8 @@ class CreateOrderRequest extends FormRequest
 
     /**
      * Determine if the user is authorized to make this request. Orders
-     * require a verified customer. Email is always required; mobile OTP
-     * verification is required only when Firebase OTP verification is enabled.
+     * require a verified customer per authentication settings
+     * (email and/or mobile OTP toggles).
      */
     public function authorize(): bool
     {
@@ -62,14 +62,18 @@ class CreateOrderRequest extends FormRequest
     protected function failedAuthorization(): void
     {
         $user = $this->user();
-        $otpRequired = app(SettingService::class)->isFirebaseOtpVerificationEnabled();
+        $settings = app(SettingService::class);
+        $emailRequired = $settings->isEmailVerificationRequired();
+        $otpRequired = $settings->isFirebaseOtpVerificationEnabled();
 
         throw new HttpResponseException(
             ApiResponseType::sendJsonResponse(
                 false,
                 'labels.account_verification_required',
                 [
-                    'email_verified' => $user?->email_verified_at !== null,
+                    'email_verified' => $emailRequired
+                        ? ($user?->email_verified_at !== null)
+                        : true,
                     'mobile_verified' => $otpRequired
                         ? ($user?->mobile_verified_at !== null)
                         : true,

@@ -353,6 +353,21 @@ class SettingService
     }
 
     /**
+     * Whether email verification is required before placing an order.
+     * Defaults to true when the setting key is missing (backward compatible).
+     */
+    public function isEmailVerificationRequired(): bool
+    {
+        $config = $this->getSettingValues(SettingTypeEnum::AUTHENTICATION());
+
+        if (! array_key_exists('requireEmailVerification', $config)) {
+            return true;
+        }
+
+        return filter_var($config['requireEmailVerification'], FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
      * Resolve the phonecode for the first country matching the given currency.
      */
     public function resolveCountryCodeFromCurrency(?string $currency): string

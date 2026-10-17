@@ -257,20 +257,22 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
 
     /**
      * Whether this customer account is verified enough to place an order.
-     * Email is always required. Mobile OTP verification is only required when
-     * Firebase OTP verification is enabled in authentication settings.
+     * Email and mobile checks follow authentication settings toggles
+     * (requireEmailVerification / firebaseOtpVerification).
      */
     public function isFullyVerified(): bool
     {
-        if ($this->email_verified_at === null) {
+        $settings = app(SettingService::class);
+
+        if ($settings->isEmailVerificationRequired() && $this->email_verified_at === null) {
             return false;
         }
 
-        if (! app(SettingService::class)->isFirebaseOtpVerificationEnabled()) {
-            return true;
+        if ($settings->isFirebaseOtpVerificationEnabled() && $this->mobile_verified_at === null) {
+            return false;
         }
 
-        return $this->mobile_verified_at !== null;
+        return true;
     }
 
     /**

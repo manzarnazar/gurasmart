@@ -44,6 +44,10 @@ class AuthenticationSettingResource extends JsonResource
                 'firebaseOtpVerification' => array_key_exists('firebaseOtpVerification', $this->value ?? [])
                     ? (bool) $this->value['firebaseOtpVerification']
                     : true,
+                // Default true so existing installs keep email verification required until admin turns it off.
+                'requireEmailVerification' => array_key_exists('requireEmailVerification', $this->value ?? [])
+                    ? (bool) $this->value['requireEmailVerification']
+                    : true,
                 'googleLogin' => $this->value['googleLogin'] ?? null,
                 'smsGateway' => $smsGateway,
             ]

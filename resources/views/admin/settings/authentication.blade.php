@@ -385,6 +385,18 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="row">
+                                                <span class="col">{{ __('labels.require_email_verification') }}</span>
+                                                <span class="col-auto">
+                                                        <label class="form-check form-check-single form-switch">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   name="requireEmailVerification" value="1" {{ ($settings['requireEmailVerification'] ?? true) ? 'checked' : '' }} />
+                                                        </label>
+                                                    </span>
+                                                <small class="form-text text-muted">{{ __('labels.require_email_verification_hint') }}</small>
+                                            </label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="row">
                                                 <span class="col">{{ __('labels.firebase_otp_verification') }}</span>
                                                 <span class="col-auto">
                                                         <label class="form-check form-check-single form-switch">

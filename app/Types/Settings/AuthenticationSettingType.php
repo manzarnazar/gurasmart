@@ -34,6 +34,8 @@ class AuthenticationSettingType implements SettingInterface
     public string $fireBaseMeasurementId = "";
     /** When true, phone OTP login/verification is required for customers. */
     public bool $firebaseOtpVerification = true;
+    /** When true, email verification is required before placing an order. */
+    public bool $requireEmailVerification = true;
     public bool $googleLogin = false;
     public string $smsGateway = '';
 
@@ -61,6 +63,7 @@ class AuthenticationSettingType implements SettingInterface
             'fireBaseAppId' => 'required_if:firebase,true|nullable|string',
             'fireBaseMeasurementId' => 'required_if:firebase,true|nullable|string',
             'firebaseOtpVerification' => 'nullable|boolean',
+            'requireEmailVerification' => 'nullable|boolean',
             'googleRecaptchaSiteKey' => 'nullable|string',
             'googleLogin' => 'boolean',
             'smsGateway' => 'nullable|string|in:custom,firebase',
@@ -136,6 +139,7 @@ class AuthenticationSettingType implements SettingInterface
             // Firebase
             'firebase.boolean' => 'The Firebase option must be true or false.',
             'firebaseOtpVerification.boolean' => 'Firebase OTP verification must be enabled or disabled (true/false).',
+            'requireEmailVerification.boolean' => 'Require email verification must be enabled or disabled (true/false).',
 
             'fireBaseApiKey.required_if'          => 'Firebase API Key is required when Firebase is enabled.',
             'fireBaseAuthDomain.required_if'      => 'Firebase Auth Domain is required when Firebase is enabled.',

@@ -19,9 +19,16 @@ class StoreStoreRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if ($this->input('whatsapp_number') === '' || $this->input('whatsapp_number') === null) {
+        $whatsapp = $this->input('whatsapp_number');
+        if ($whatsapp === null || $whatsapp === '') {
             $this->merge(['whatsapp_number' => null]);
+
+            return;
         }
+
+        // Sellers enter country code + number; strip +, spaces, dashes before validate/save.
+        $digits = preg_replace('/\D+/', '', (string) $whatsapp);
+        $this->merge(['whatsapp_number' => $digits !== '' ? $digits : null]);
     }
 
     /**
